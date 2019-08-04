@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start"><ion-back-button defaultHref="/client/category/{{categoryId}}"></ion-back-button></ion-buttons>
+    <ion-title>Contractor Detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card *ngIf="!contractor">
+    <ion-card-content>
+      Loading...
+    </ion-card-content>
+  </ion-card>
+  <div class="contractor" *ngIf="contractor">
+    <ion-segment (ionChange)="segmentChanged($event)" value="profile">
+        <ion-segment-button value="profile"><ion-label>Profile</ion-label></ion-segment-button>
+        <ion-segment-button value="review"><ion-label>Reviews</ion-label></ion-segment-button>
+    </ion-segment>
+    <div class="profile" *ngIf="displayedSegment === 'profile'">
+      <ion-card *ngIf="contractor">
+          <ion-card-content>
+            Full Name: {{contractor.firstName + " " + contractor.lastName }} <br>
+            Phone: {{contractor.phone}} <br>
+            Email: {{contractor.email}}
+          </ion-card-content>
+      </ion-card>
+    </div>
+    <div class="review" *ngIf="displayedSegment === 'review'">
+      <ion-card *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+        <ion-card-content>
+          Review # {{i}} goes here
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

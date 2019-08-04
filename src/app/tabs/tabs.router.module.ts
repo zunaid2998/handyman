@@ -1,53 +1,76 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
+import { RequestPage } from '../request/request.page';
+import { NotificationPage } from '../notification/notification.page';
+import { CategoryPage } from '../category/category.page';
+import { AccountPage } from '../account/account.page';
+import { ChatPage } from '../chat/chat.page';
+import { AuthguardService } from '../service/authguard.service';
 
 const routes: Routes = [
   {
-    path: 'tabs',
-    component: TabsPage,
-    children: [
-      {
-        path: 'tab1',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../tab1/tab1.module').then(m => m.Tab1PageModule)
-          }
-        ]
-      },
-      {
-        path: 'tab2',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../tab2/tab2.module').then(m => m.Tab2PageModule)
-          }
-        ]
-      },
-      {
-        path: 'tab3',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../tab3/tab3.module').then(m => m.Tab3PageModule)
-          }
-        ]
-      },
-      {
-        path: '',
-        redirectTo: '/tabs/tab1',
-        pathMatch: 'full'
-      }
-    ]
+    path: '',
+    redirectTo: '/client/category',
+    pathMatch: 'full',
+    canActivate: [AuthguardService]
   },
   {
-    path: '',
-    redirectTo: '/tabs/tab1',
-    pathMatch: 'full'
+    path: 'client',
+    component: TabsPage,
+    canActivate: [AuthguardService],
+    children: [
+      {
+        path: '',
+        redirectTo: '/client/category',
+        pathMatch: 'full'
+      },
+      {
+        path: 'request',
+        children: [
+          {
+            path: '',
+            loadChildren: ()=> import('../request/request.module').then(m => m.RequestPageModule)
+          }
+        ]
+      },
+      {
+        path: 'notification',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../notification/notification.module').then(m => m.NotificationPageModule)
+          }
+        ]
+      },
+      {
+        path: 'category',
+        children: [
+          {
+            path: '',
+            loadChildren: ()=> import('../category/category.module').then(m => m.CategoryPageModule)
+          }
+        ]
+      },
+      {
+        path: 'account',
+        children: [
+          {
+            path: '',
+            loadChildren: ()=> import('../account/account.module').then(m => m.AccountPageModule)
+          }
+        ]
+      },
+      {
+        path: 'chat',
+        children: [
+          {
+            path: '',
+            loadChildren: ()=> import('../chat/chat.module').then(m => m.ChatPageModule)
+          }
+        ]
+      }
+    ]
   }
 ];
 

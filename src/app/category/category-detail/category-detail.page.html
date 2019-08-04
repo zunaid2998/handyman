@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start"><ion-back-button defaultHref="/client/category"></ion-back-button></ion-buttons>
+    <ion-title>Category - {{category.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      List of contractors
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngIf="!category">
+    Loading ...
+  </ion-card>
+  <div class="contractor-list" *ngIf="category && category.contractors">
+    <ion-card *ngIf="category.contractors.length === 0">
+      <ion-card-content>
+        No Contractor found. You can post a custom request. Or try other categories
+      </ion-card-content>
+    </ion-card>
+    <ion-card *ngFor="let contractor of category.contractors" (click)="onclickContractor(contractor.id)">
+      <ion-card-content>
+        Name - {{contractor.firstName + " " + contractor.lastName }} <br>
+        Phone - {{contractor.phone}} <br>
+        Email - {{contractor.email}}
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content
+>

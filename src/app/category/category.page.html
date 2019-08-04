@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Category</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar
+    animated
+    placeholder="Filter Service"
+    (ionChange)="onChangeSearch($event)">
+  </ion-searchbar>
+  <ion-card *ngFor="let category of categories" (click)="onClickCategory(category)" routerDirection="forward">
+    <ion-card-content>
+      {{category.name}}
+    </ion-card-content>
+  </ion-card>
+</ion-content>
