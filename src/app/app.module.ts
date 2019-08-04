@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { AuthguardService } from './service/authguard.service';
 import { CategoryService } from './service/category.service';
 import { ContractorService } from './service/contractor.service';
+import { NotificationService } from './service/notificaton.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +23,8 @@ import { ContractorService } from './service/contractor.service';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AuthguardService,
     CategoryService,
-    ContractorService
+    ContractorService,
+    NotificationService
   ],
   bootstrap: [AppComponent]
 })
