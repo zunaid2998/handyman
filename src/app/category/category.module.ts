@@ -7,14 +7,15 @@ import { IonicModule } from '@ionic/angular';
 
 import { CategoryPage } from './category.page';
 import { CategoryDetailPageModule } from './category-detail/category-detail.module';
+import { ContractorDetailPageModule } from './contractor-detail/contractor-detail.module';
 
 const routes: Routes = [
   {
     path: '',
     component: CategoryPage
   },
-  { path: ':id', loadChildren: './category-detail/category-detail.module#CategoryDetailPageModule' },
-  { path: ':id/contractor/:contractorId', loadChildren: './contractor-detail/contractor-detail.module#ContractorDetailPageModule' }
+  { path: ':id', loadChildren: () => CategoryDetailPageModule },
+  { path: ':id/contractor/:contractorId', loadChildren: () => ContractorDetailPageModule }
 ];
 
 @NgModule({
