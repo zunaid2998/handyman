@@ -6,12 +6,20 @@
 
 <ion-content>
   <ion-content>
-    <ion-virtual-scroll [items]="notifications">
+    <!--ion-virtual-scroll [items]="notifications">
       <ion-card *virtualItem="let notification">
         <ion-card-content>
           {{ notification.message }}
         </ion-card-content>
       </ion-card>
-    </ion-virtual-scroll>
+    </ion-virtual-scroll-->
+    <ion-list>
+      <ion-card *ngFor="let notification of notifications" class="animated slideInDown duration-1s">
+          <ion-card-content>
+            {{ notification.message }}
+          </ion-card-content>
+      </ion-card>
+    </ion-list>
+
   </ion-content>
 </ion-content>

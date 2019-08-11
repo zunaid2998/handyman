@@ -12,6 +12,7 @@ export class ContractorDetailPage implements OnInit {
   contractor: Contractor
   displayedSegment: string
   categoryId: number
+  segment: any
   constructor(private contractorService: ContractorService,
               private activedRoute: ActivatedRoute) { }
 
@@ -19,7 +20,6 @@ export class ContractorDetailPage implements OnInit {
     this.activedRoute.params.subscribe(params => {
       this.categoryId = parseInt(params.id)
       this.contractor = this.contractorService.getContractor(parseInt(params.contractorId))
-      this.displayedSegment = 'profile'
     })
   }
 

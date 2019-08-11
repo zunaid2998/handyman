@@ -12,6 +12,7 @@ import { AuthguardService } from './service/authguard.service';
 import { CategoryService } from './service/category.service';
 import { ContractorService } from './service/contractor.service';
 import { NotificationService } from './service/notificaton.service';
+import { PusherService } from './service/pusher.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +25,8 @@ import { NotificationService } from './service/notificaton.service';
     AuthguardService,
     CategoryService,
     ContractorService,
-    NotificationService
+    NotificationService,
+    PusherService
   ],
   bootstrap: [AppComponent]
 })

@@ -16,7 +16,7 @@
         <ion-segment-button value="profile"><ion-label>Profile</ion-label></ion-segment-button>
         <ion-segment-button value="review"><ion-label>Reviews</ion-label></ion-segment-button>
     </ion-segment>
-    <div class="profile" *ngIf="displayedSegment === 'profile'">
+    <div class="profile" *ngIf="!displayedSegment || displayedSegment === 'profile'">
       <ion-card *ngIf="contractor">
           <ion-card-content>
             Full Name: {{contractor.firstName + " " + contractor.lastName }} <br>
