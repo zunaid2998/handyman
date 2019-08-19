@@ -7,12 +7,17 @@ import { ForgotPasswordPageModule } from './auth/forgot-password/forgot-password
 const routes: Routes = [
   {
     path: '',
+    loadChildren: () => LoginPageModule
+  },
+  {
+    path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   { path: 'login', loadChildren: () => LoginPageModule },
   { path: 'register', loadChildren: () => RegisterPageModule},
   { path: 'forgot-password', loadChildren: () => ForgotPasswordPageModule },
-  { path: '**', redirectTo: '/login' }
+  { path: '**', redirectTo: '/login' },
+  { path: 'service-detail', loadChildren: './category/service-detail/service-detail.module#ServiceDetailPageModule' }
 ];
 @NgModule({
   imports: [

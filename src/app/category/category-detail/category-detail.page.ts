@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Category } from 'src/app/model/category';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Service } from 'src/app/model/service';
+import { CategoryService } from 'src/app/service/category.service';
 
 @Component({
   selector: 'app-category-detail',
@@ -8,18 +9,27 @@ import { Router } from '@angular/router';
   styleUrls: ['./category-detail.page.scss'],
 })
 export class CategoryDetailPage implements OnInit {
-  category: Category
+  categoryId: number
+  services: Service[]
 
-  constructor(private router: Router) { }
+  constructor(private activatedRoute: ActivatedRoute,
+              private categoryService: CategoryService,
+              private router: Router) { }
 
   ngOnInit() {
-    if(this.router.getCurrentNavigation().extras.state){
-      this.category = this.router.getCurrentNavigation().extras.state.category
+    this.activatedRoute.params.subscribe((params: any) => {
+      this.categoryId = parseInt(params.id)
+    })
+    if(this.categoryId) {
+      this.categoryService.getServicesByCategory(this.categoryId)
+        .subscribe((res: any) => {
+          this.services = res.services
+        }, error => console.log(error))
     }
   }
 
-  onclickContractor(id: number): void {
-    this.router.navigate(['client','category', this.category.id ,'contractor', id])
+  onclickService(service: Service): void {
+    this.router.navigate(['client','category', this.categoryId ,'service', service.id])
   }
 
 }

@@ -13,11 +13,13 @@ import { CategoryService } from './service/category.service';
 import { ContractorService } from './service/contractor.service';
 import { NotificationService } from './service/notificaton.service';
 import { PusherService } from './service/pusher.service';
+import { AuthService } from './service/auth.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [HttpClientModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [
     StatusBar,
     SplashScreen,
@@ -26,7 +28,8 @@ import { PusherService } from './service/pusher.service';
     CategoryService,
     ContractorService,
     NotificationService,
-    PusherService
+    PusherService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

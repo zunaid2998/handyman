@@ -1,32 +1,21 @@
 import { Injectable } from '@angular/core';
-import { Contractor } from '../model/contractor';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContractorService {
-  contractors = [{
-    id: 1,
-    firstName: 'Ahmed',
-    lastName: 'Zunaid',
-    phone: '4313355435',
-    email: 'zunaid2998@gmail.com'
-  },
-  {
-    id: 2,
-    firstName: 'Saima',
-    lastName: 'Akhter',
-    phone: '4313359475',
-    email: 'saima.auw@gmail.com'
-  }]
 
-  constructor() { }
+  reqHeader = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ' + localStorage.getItem('token')
+  })
 
-  getContractors(): Contractor[] {
-    return this.contractors
-  }
+  constructor(private http: HttpClient) { }
 
-  getContractor(id: number): Contractor {
-    return this.contractors.find(contractor => contractor.id === id)
+  getContractor(id: number): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/consumer/contractors/${id}`, {headers: this.reqHeader})
   }
 }

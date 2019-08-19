@@ -1,9 +1,32 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content padding text-center>
+    <ion-card class="logo-container animated zoomIn">
+      <ion-card-content class="logo">
+        <ion-label>Handyman</ion-label>
+      </ion-card-content>
+    </ion-card>
+    <p>Sign in or Sign up to continue</p>
 
-<ion-content>
+    <form #f="ngForm" (ngSubmit)="loginButtonClicked(f)" class="login-form">
+      <ion-list>
+        <ion-item>
+          <ion-input
+            type="text"
+            placeholder="Email"
+            name="email"
+            [(ngModel)]="user.email"
+            #username="ngModel" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            type="password"
+            placeholder="Password"
+            name="password"
+            [(ngModel)]="user.password"
+            #password="ngModel" required></ion-input>
+        </ion-item>
+      </ion-list>
+      <ion-button expand="block" type="submit" [disabled]=!f.valid>Sign in</ion-button>
+    </form>
 
+    <p>Don't have a account ? Please <a routerLink="/register">Register</a></p>
 </ion-content>

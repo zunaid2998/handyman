@@ -6,8 +6,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { CategoryPage } from './category.page';
-import { CategoryDetailPageModule } from './category-detail/category-detail.module';
 import { ContractorDetailPageModule } from './contractor-detail/contractor-detail.module';
+import { ServiceDetailPageModule } from './service-detail/service-detail.module';
+import { CategoryDetailPageModule } from './category-detail/category-detail.module';
 
 const routes: Routes = [
   {
@@ -15,7 +16,8 @@ const routes: Routes = [
     component: CategoryPage
   },
   { path: ':id', loadChildren: () => CategoryDetailPageModule },
-  { path: ':id/contractor/:contractorId', loadChildren: () => ContractorDetailPageModule }
+  { path: ':id/service/:serviceId', loadChildren: () => ServiceDetailPageModule },
+  { path: ':id/service/:serviceId/contractor/:contractorId', loadChildren: () => ContractorDetailPageModule }
 ];
 
 @NgModule({

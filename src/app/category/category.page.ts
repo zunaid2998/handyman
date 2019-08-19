@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Category } from '../model/category';
+import { Service } from '../model/service';
 import { CategoryService } from '../service/category.service';
 import { Router, NavigationExtras } from '@angular/router';
+import { Category } from '../model/category';
 
 @Component({
   selector: 'app-category',
@@ -16,7 +17,10 @@ export class CategoryPage implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    this.categories = this.categoryService.getCategories();
+    this.categoryService.getCategories()
+      .subscribe((res: any) => {
+        this.categories = res.categories
+      }, error => console.log(error))
   }
 
   onChangeSearch(event: any): void {
@@ -24,12 +28,7 @@ export class CategoryPage implements OnInit {
   }
 
   onClickCategory(category: Category): void {
-    let navigationExtras: NavigationExtras = {
-      state: {
-        category: category
-      }
-    }
-    this.router.navigate(['client', 'category', category.id], navigationExtras)
+    this.router.navigate(['client', 'category', category.id])
   }
 
 }

@@ -12,6 +12,8 @@ export class ContractorDetailPage implements OnInit {
   contractor: Contractor
   displayedSegment: string
   categoryId: number
+  serviceId: number
+  contractorId: number
   segment: any
   constructor(private contractorService: ContractorService,
               private activedRoute: ActivatedRoute) { }
@@ -19,7 +21,15 @@ export class ContractorDetailPage implements OnInit {
   ngOnInit() {
     this.activedRoute.params.subscribe(params => {
       this.categoryId = parseInt(params.id)
-      this.contractor = this.contractorService.getContractor(parseInt(params.contractorId))
+      this.serviceId = parseInt(params.serviceId)
+      this.contractorId = parseInt(params.contractorId)
+      if(this.categoryId && this.serviceId && this.contractorId) {
+        this.contractorService.getContractor(this.contractorId)
+          .subscribe((res: any) => {
+            this.contractor = res.contractor
+          }, error => console.log(error))
+      }
+
     })
   }
 

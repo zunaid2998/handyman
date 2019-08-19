@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start"><ion-back-button defaultHref="/client/category/{{categoryId}}"></ion-back-button></ion-buttons>
+    <ion-buttons slot="start"><ion-back-button defaultHref="/client/category/{{categoryId}}/service/{{serviceId}}"></ion-back-button></ion-buttons>
     <ion-title>Contractor Detail</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -26,9 +26,9 @@
       </ion-card>
     </div>
     <div class="review" *ngIf="displayedSegment === 'review'">
-      <ion-card *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">
+      <ion-card *ngFor="let review of contractor.reviews">
         <ion-card-content>
-          Review # {{i}} goes here
+          Review # {{review.message}} goes here
         </ion-card-content>
       </ion-card>
     </div>

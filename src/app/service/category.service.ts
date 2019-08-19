@@ -1,55 +1,29 @@
 import { Injectable } from '@angular/core';
-import { Category } from '../model/category';
-import { Contractor } from '../model/contractor';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment.prod';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
-  contractors = [{
-    id: 1,
-    firstName: 'Ahmed',
-    lastName: 'Zunaid',
-    phone: '4313355435',
-    email: 'zunaid2998@gmail.com'
-  },
-  {
-    id: 2,
-    firstName: 'Saima',
-    lastName: 'Akhter',
-    phone: '4313359475',
-    email: 'saima.auw@gmail.com'
-  }]
 
-  categories = [
-    {
-      id: 1,
-      name: 'Plumbing',
-      contractors: this.contractors
-    },
-    {
-      id: 2,
-      name: 'Home Cleaning',
-      contractors: this.contractors
-    },
-    {
-      id: 3,
-      name: 'Heating',
-      contractors: this.contractors
-    }
-  ]
+  reqHeader = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ' + localStorage.getItem('token')
+  })
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  getCategories(): Category[] {
-    return this.categories
+  getCategories(): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/consumer/categories`, {headers: this.reqHeader})
   }
 
-  getCategory(id: number): Category {
-    return this.categories.find(category => category.id === id)
+  getServicesByCategory(categoryId: number): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/consumer/categories/${categoryId}/services`, {headers: this.reqHeader})
   }
 
-  getContractorsByCategory(categoryId: number): Category {
-    return this.categories.find(category => category.id === categoryId)
+  getContractorsByServices(serviceId: number): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/consumer/services/${serviceId}/contractors`, {headers: this.reqHeader})
   }
 }

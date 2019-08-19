@@ -12,7 +12,7 @@
   </ion-searchbar>
   <ion-card *ngFor="let category of categories" (click)="onClickCategory(category)" routerDirection="forward">
     <ion-card-content>
-      {{category.name}}
+      {{category.categoryName}}
     </ion-card-content>
   </ion-card>
 </ion-content>
