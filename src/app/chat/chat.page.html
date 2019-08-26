@@ -25,7 +25,7 @@
         </ion-thumbnail>
         <div class="ion-margin-start">
             <h2 class="bold">{{chat.firstName + " " + chat.lastName }}</h2>
-            <p>{{chat.lastMessage.message}}</p>
+            <p>{{chat.lastMessage ? chat.lastMessage.message : ''}}</p>
         </div>
       </ion-card-content>
     </ion-card>

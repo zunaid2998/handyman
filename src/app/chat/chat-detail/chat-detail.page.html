@@ -5,34 +5,36 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content #content>
   <ion-card *ngIf="loading">
     <ion-card-content>
       Loading ...
     </ion-card-content>
   </ion-card>
   <ion-list *ngIf="!loading">
-    <ion-card *ngIf="conversations.length == 0" class="animated slideInDown duration-1s">
+    <ion-card *ngIf="chat.conversation.length == 0" class="animated slideInDown duration-1s">
         <ion-card-content>
           No chat history found. Lets start messaging
         </ion-card-content>
     </ion-card>
-    <ion-card *ngFor="let conversation of conversations" class="animated slideInDown duration-1s ion-margin-vertical">
-      <ion-card-content class="flex">
-        <ion-thumbnail slot="start">
+    <ion-item *ngFor="let conversation of chat.conversation" class="ion-no-margin chat" lines="none">
+      <ion-thumbnail *ngIf="conversation.senderType === 'contractor'">
           <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-        </ion-thumbnail>
-        <div class="ion-margin-start">
-            <h2>{{conversation.message}}</h2>
-        </div>
-      </ion-card-content>
-    </ion-card>
+      </ion-thumbnail>
+      <ion-card slot="{{conversation.senderType === 'consumer' ? 'end' : ''}}">
+        <ion-card-content>
+          <h2>{{conversation.message}}</h2>
+        </ion-card-content>
+      </ion-card>
+      <ion-thumbnail *ngIf="conversation.senderType === 'consumer'" slot="{{conversation.senderType === 'consumer' ? 'end' : ''}}">
+          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+      </ion-thumbnail>
+    </ion-item>
   </ion-list>
 </ion-content>
 <ion-footer>
   <ion-toolbar>
-    <ion-item>
-    <ion-textarea rows="2" name="dummyText"></ion-textarea>
-  </ion-item>
+    <ion-textarea rows="2" name="writtenMessage" [(ngModel)]="writtenMessage" placeholder="Write your message here"></ion-textarea>
+    <ion-button class="send" (click)="onClickSend()" [disabled]="writtenMessage.length == 0">Send</ion-button>
   </ion-toolbar>
 </ion-footer>

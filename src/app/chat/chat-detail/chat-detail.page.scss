@@ -1,0 +1,25 @@
+ion-footer {
+  ion-toolbar {
+    display: flex;
+  }
+  ion-textarea {
+    display: inline-block;
+    width: 79%;
+  }
+  ion-button {
+    &.send {
+      display: inline-block;
+      width: 20%;
+      position: absolute;
+      top: 7px;
+      right: 5px;
+    }
+  }
+}
+ion-item {
+  &.chat {
+    ion-card {
+      margin: 10px;
+    }
+  }
+}

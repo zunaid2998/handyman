@@ -23,7 +23,7 @@ export class ChatService {
     return this.http.get(`${environment.apiUrl}/consumer/chat/${id}`, {headers: this.reqHeader})
   }
 
-  addMessageToChat(id: number, message: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/consumer/chat/${id}`, message, {headers: this.reqHeader})
+  updateConversation(id: number, conversation: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/consumer/chat/${id}`, {conversation: conversation}, {headers: this.reqHeader})
   }
 }

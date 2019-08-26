@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ChatService } from 'src/app/service/chat.service';
+import { IonDatetime } from '@ionic/angular';
 
 @Component({
   selector: 'app-chat-detail',
   templateUrl: './chat-detail.page.html',
-  styleUrls: ['./chat-detail.page.scss'],
+  styleUrls: ['./chat-detail.page.scss']
 })
 export class ChatDetailPage implements OnInit {
+  @ViewChild('content', null) content: any
 
-  conversations: any = []
   loading: boolean
+  writtenMessage: string = ''
+  chat: any
 
   constructor(private activatedRoute: ActivatedRoute, private chatService: ChatService) { }
 
@@ -19,11 +22,36 @@ export class ChatDetailPage implements OnInit {
       if(params.id){
         this.loading = true
         this.chatService.getChatDetail(params.id).subscribe((data: any) => {
-          if(data && data.chat) this.conversations = data.chat.conversation
-          console.log(this.conversations)
+          if(data && data.chat) {
+            this.chat = data.chat
+          }
         }, error => console.log(error), () => this.loading = false )
       }
     })
+  }
+
+  ionViewDidEnter(){
+    this.scrollToBottom()
+  }
+
+  onClickSend(): void {
+    let conversation: any = {
+      message: this.writtenMessage,
+      dateTime: new Date(),
+      senderName: 'Ahmed',
+      senderType: 'consumer'
+    }
+    this.chat.conversation.push(conversation)
+    this.chatService.updateConversation(this.chat.id, this.chat.conversation)
+      .subscribe((data: any) => {
+        console.log(data)
+        this.writtenMessage = ''
+        this.scrollToBottom()
+      }, error => console.log(error))
+  }
+
+  scrollToBottom(): void {
+    this.content.scrollToBottom(300)
   }
 
 }
