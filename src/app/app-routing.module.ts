@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'register', loadChildren: () => RegisterPageModule},
   { path: 'forgot-password', loadChildren: () => ForgotPasswordPageModule },
   { path: '**', redirectTo: '/login' },
-  { path: 'service-detail', loadChildren: './category/service-detail/service-detail.module#ServiceDetailPageModule' }
+  // { path: 'service-detail', loadChildren: './category/service-detail/service-detail.module#ServiceDetailPageModule' }
 ];
 @NgModule({
   imports: [

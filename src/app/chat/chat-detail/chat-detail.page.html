@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start"><ion-back-button defaultHref="/client/chat"></ion-back-button></ion-buttons>
+    <ion-title>Conversation</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="loading">
+    <ion-card-content>
+      Loading ...
+    </ion-card-content>
+  </ion-card>
+  <ion-list *ngIf="!loading">
+    <ion-card *ngIf="conversations.length == 0" class="animated slideInDown duration-1s">
+        <ion-card-content>
+          No chat history found. Lets start messaging
+        </ion-card-content>
+    </ion-card>
+    <ion-card *ngFor="let conversation of conversations" class="animated slideInDown duration-1s ion-margin-vertical">
+      <ion-card-content class="flex">
+        <ion-thumbnail slot="start">
+          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+        </ion-thumbnail>
+        <div class="ion-margin-start">
+            <h2>{{conversation.message}}</h2>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-item>
+    <ion-textarea rows="2" name="dummyText"></ion-textarea>
+  </ion-item>
+  </ion-toolbar>
+</ion-footer>

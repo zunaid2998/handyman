@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ChatService } from '../service/chat.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chat',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatPage implements OnInit {
 
-  constructor() { }
+  chats: any = []
+  loading: boolean;
+
+  constructor(private chatService: ChatService, private router: Router) {}
 
   ngOnInit() {
+    this.loading = true;
+    this.chatService.getChats().subscribe((data: any) =>{
+      this.chats = data.chats
+      this.loading = false;
+      console.log(this.chats)
+    }, error => console.log(error))
+  }
+
+  onClickChat(chat: any){
+    this.router.navigate(['client', 'chat', chat.id])
   }
 
 }

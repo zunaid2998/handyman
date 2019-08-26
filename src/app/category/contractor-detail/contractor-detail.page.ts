@@ -37,4 +37,8 @@ export class ContractorDetailPage implements OnInit {
     this.displayedSegment = ev.detail.value
   }
 
+  onClickChat(): any {
+
+  }
+
 }

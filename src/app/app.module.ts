@@ -15,6 +15,7 @@ import { NotificationService } from './service/notificaton.service';
 import { PusherService } from './service/pusher.service';
 import { AuthService } from './service/auth.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ChatService } from './service/chat.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,7 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
     ContractorService,
     NotificationService,
     PusherService,
-    AuthService
+    AuthService,
+    ChatService
   ],
   bootstrap: [AppComponent]
 })

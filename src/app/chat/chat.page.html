@@ -5,5 +5,29 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-card *ngIf="loading">
+      <ion-card-content>
+        Loading ...
+      </ion-card-content>
+  </ion-card>
+  <ion-list *ngIf="!loading">
+    <ion-card *ngIf="chats.length == 0" class="animated slideInDown duration-1s">
+        <ion-card-content>
+          No chat history found
+        </ion-card-content>
+    </ion-card>
+    <ion-card *ngFor="let chat of chats"
+              class="animated slideInDown duration-1s ion-margin-vertical"
+              (click)="onClickChat(chat)">
+      <ion-card-content>
+        <ion-thumbnail slot="start">
+          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+        </ion-thumbnail>
+        <div class="ion-margin-start">
+            <h2 class="bold">{{chat.firstName + " " + chat.lastName }}</h2>
+            <p>{{chat.lastMessage.message}}</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
 </ion-content>
