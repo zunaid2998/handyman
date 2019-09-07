@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start"><ion-back-button defaultHref="client/request"></ion-back-button></ion-buttons>
+    <ion-title>Request Detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card *ngIf="loading">
+    Loading ...
+  </ion-card>
+  <div *ngIf="!loading">
+    <div *ngIf="order">
+      <ion-card no-margin margin-bottom>
+          <ion-card-content>
+              Contractor : {{order.contractor.firstName + ' ' + order.contractor.lastName}} <br>
+              Order created: {{order.created_at | date: 'mediumDate'}} <br>
+              Status: {{order.status}}
+          </ion-card-content>
+      </ion-card>
+      <ion-button expand="block" (click)="onClickComplete()">Complete</ion-button>
+    </div>
+  </div>
+</ion-content>
+

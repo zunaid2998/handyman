@@ -6,11 +6,17 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { RequestPage } from './request.page';
+import { RequestDetailPageModule } from './request-detail/request-detail.module';
+import { SubmitReviewPageModule } from './submit-review/submit-review.module';
 
 const routes: Routes = [
   {
     path: '',
     component: RequestPage
+  },
+  {
+    path: ':id',
+    loadChildren: () => RequestDetailPageModule
   }
 ];
 
@@ -19,7 +25,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SubmitReviewPageModule
   ],
   declarations: [RequestPage]
 })

@@ -1,9 +1,25 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>request</ion-title>
+    <ion-title>Request</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-card *ngIf="loading">
+    Loading ...
+  </ion-card>
+  <div *ngIf="!loading">
+    <ion-card *ngIf="orders && orders.length === 0">
+      Hey, Looks like you haven't started ordering service yet
+    </ion-card>
+    <div *ngIf="orders && orders.length > 0">
+      <ion-card *ngFor="let order of orders" (click)="onClickOrder(order.id)">
+          <ion-card-content>
+              Contractor : {{order.firstName + ' ' + order.lastName}} <br>
+              Order created: {{order.created_at | date: 'mediumDate'}} <br>
+              Status: {{order.status}}
+          </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
 </ion-content>

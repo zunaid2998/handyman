@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ContractorService } from 'src/app/service/contractor.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Contractor } from 'src/app/model/contractor';
+import { ChatService } from 'src/app/service/chat.service';
 
 @Component({
   selector: 'app-contractor-detail',
@@ -16,7 +17,9 @@ export class ContractorDetailPage implements OnInit {
   contractorId: number
   segment: any
   constructor(private contractorService: ContractorService,
-              private activedRoute: ActivatedRoute) { }
+              private activedRoute: ActivatedRoute,
+              private chatService: ChatService,
+              private router: Router) { }
 
   ngOnInit() {
     this.activedRoute.params.subscribe(params => {
@@ -38,7 +41,9 @@ export class ContractorDetailPage implements OnInit {
   }
 
   onClickChat(): any {
-
+    this.chatService.createChat(this.contractorId).subscribe((data: any) => {
+        if(data && data.chatId) this.router.navigate(['client', 'chat', data.chatId])
+      }, error => console.log(error))
   }
 
 }

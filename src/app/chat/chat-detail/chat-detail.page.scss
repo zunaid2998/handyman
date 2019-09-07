@@ -20,6 +20,7 @@ ion-item {
   &.chat {
     ion-card {
       margin: 10px;
+      max-width: 76%;
     }
   }
 }

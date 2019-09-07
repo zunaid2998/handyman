@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ChatService } from 'src/app/service/chat.service';
 import { IonDatetime } from '@ionic/angular';
+import { OrderService } from 'src/app/service/order.service';
 
 @Component({
   selector: 'app-chat-detail',
@@ -15,7 +16,10 @@ export class ChatDetailPage implements OnInit {
   writtenMessage: string = ''
   chat: any
 
-  constructor(private activatedRoute: ActivatedRoute, private chatService: ChatService) { }
+  constructor(private activatedRoute: ActivatedRoute,
+              private chatService: ChatService,
+              private orderService: OrderService,
+              private router: Router) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: any) => {
@@ -52,6 +56,14 @@ export class ChatDetailPage implements OnInit {
 
   scrollToBottom(): void {
     this.content.scrollToBottom(300)
+  }
+
+  onClickBook(): void {
+    this.orderService.createOrder({contractorId: this.chat.contractorId})
+      .subscribe((response: any) => {
+        console.log(response.order)
+        this.router.navigate(['client', 'request']);
+      }, error => console.log(error))
   }
 
 }

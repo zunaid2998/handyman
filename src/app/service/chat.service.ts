@@ -15,6 +15,10 @@ export class ChatService {
 
   constructor(private http: HttpClient) { }
 
+  createChat(contractorId: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/consumer/chats`, {contractorId}, {headers: this.reqHeader})
+  }
+
   getChats(): Observable<any> {
     return this.http.get(`${environment.apiUrl}/consumer/chats`, {headers: this.reqHeader})
   }

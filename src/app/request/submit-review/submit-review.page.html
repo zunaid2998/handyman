@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Submit Review</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card margin-bottom no-margin>
+    <ion-card-content>
+      Submit your review
+    </ion-card-content>
+  </ion-card>
+  <div class="rating">
+      <rating [(ngModel)]="review.rating"
+            readonly="false"
+            size="default">
+      </rating>
+  </div>
+  <ion-card margin-bottom no-margin>
+    <ion-card-content>
+      <ion-textarea rows="10"
+                    placeholder="Write your review here..."
+                    [(ngModel)]="review.message">
+      </ion-textarea>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="block" (click)="onClickReviewSubmit()">Submit</ion-button>
+  <ion-button expand="block" color="light" (click)="onClickSkip()">Skip The Review</ion-button>
+
+</ion-content>
