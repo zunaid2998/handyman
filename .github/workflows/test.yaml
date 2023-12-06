@@ -10,9 +10,10 @@ jobs:
     name: "Files to lint"
     outputs:
       id: my-output
-      value: ${{ php-files }}
+      value: ${{ steps.set-output.outputs.php-files }}
     steps:
       - name: "Files to lint"
+        id: set-output
         run: echo "::set-output name=php-files::hello world"
 
 
