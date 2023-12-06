@@ -9,8 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     name: "Files to lint"
     outputs:
-      id: my-output
-      value: ${{ steps.set-output.outputs.php-files }}
+      my-output: ${{ steps.set-output.outputs.php-files }}
     steps:
       - name: "Set Output"
         id: set-output
