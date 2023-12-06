@@ -12,7 +12,7 @@ jobs:
       id: my-output
       value: ${{ steps.set-output.outputs.php-files }}
     steps:
-      - name: "Files to lint"
+      - name: "Set Output"
         id: set-output
         run: echo "::set-output name=php-files::hello world"
 
@@ -22,5 +22,5 @@ jobs:
     needs: [php-output]
     name: "PHP"
     steps:
-      - name: "PHP"
+      - name: "Use Output"
         run: echo "Output from previous job ${{ needs.php-output.outputs.my-output }}"
