@@ -9,8 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     name: "Files to lint"
     outputs:
-      id: php-files
-      value: ${{ steps.set-output.outputs.php-files }}
+      id: my-output
+      value: ${{ php-files }}
     steps:
       - name: "Files to lint"
         run: echo "::set-output name=php-files::hello world"
@@ -22,4 +22,4 @@ jobs:
     name: "PHP"
     steps:
       - name: "PHP"
-        run: echo "Output from previous job ${{ needs.php-output.outputs.php-files }}"
+        run: echo "Output from previous job ${{ needs.php-output.outputs.my-output }}"
