@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: "Set Output"
         id: set-output
-        run: echo "::set-output name=php-files::hello world"
+        run: echo "php-files=hello world" >> $GITHUB_OUTPUT
 
 
   php:
