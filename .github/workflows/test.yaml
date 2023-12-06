@@ -7,22 +7,19 @@ on:
 jobs:
   php-output:
     runs-on: ubuntu-latest
-    needs: [diff]
     name: "Files to lint"
     outputs:
       id: php-files
       value: ${{ steps.set-output.outputs.php-files }}
     steps:
       - name: "Files to lint"
-        if: ${{ fromJson(needs.diff.outputs.tags).php.changed }}
         run: echo "::set-output name=php-files::hello world"
 
 
   php:
     runs-on: ubuntu-latest
-    needs: [diff, php-output]
+    needs: [php-output]
     name: "PHP"
-    if: ${{ fromJson(needs.diff.outputs.tags).php.changed }}
     steps:
       - name: "PHP"
         run: echo "Output from previous job ${{ needs.php-output.outputs.php-files }}"
